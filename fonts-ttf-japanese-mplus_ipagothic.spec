@@ -1,5 +1,5 @@
 %define version	20060520
-%define release	%mkrel 1
+%define release	%mkrel 2
 
 Name:		fonts-ttf-japanese-mplus_ipagothic
 Summary:	M+ OUTLINE FONTS with IPA gothic for Japanese
