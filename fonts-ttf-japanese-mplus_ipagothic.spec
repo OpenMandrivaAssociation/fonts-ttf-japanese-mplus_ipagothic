@@ -1,5 +1,6 @@
 %define version	20060520
-%define release	%mkrel 2
+%define release	%mkrel 3
+%define fontdir %_datadir/fonts/TTF/japanese-mplus_ipagothic
 
 Name:		fonts-ttf-japanese-mplus_ipagothic
 Summary:	M+ OUTLINE FONTS with IPA gothic for Japanese
@@ -10,6 +11,8 @@ License:	Distributable
 URL:		http://mix-mplus-ipa.sourceforge.jp/
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
+Requires(post,postun): fontconfig
+Requires(post): mkfontdir, mkfontscale
 BuildArch:	noarch
 
 %description
@@ -23,29 +26,32 @@ so "M+ with IPA gothic" use IPA gothic for Kanji.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d %{buildroot}/%{_datadir}/fonts/ttf/japanese
-install -m 644 *.ttf %{buildroot}/%{_datadir}/fonts/ttf/japanese/
+install -d %{buildroot}/%{fontdir}
+install -m 644 *.ttf %{buildroot}/%{fontdir}
+
+mkdir -p %{buildroot}%_sysconfdir/X11/fontpath.d/
+ln -s ../../..%fontdir \
+    %{buildroot}%_sysconfdir/X11/fontpath.d/ttf-japanese-mplus_ipagothic:pri=50
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-cd %{_datadir}/fonts/ttf/japanese/
-fc-cache -f .
-ttmkfdir > fonts.dir
-/sbin/service xfs restart
+fc-cache
+cd %{fontdir}
+mkfontdir
+mkfontscale
+cd -
+
+%preun
+rm -f %fontdir/fonts.{dir,scale}
 
 %postun
-cd %{_datadir}/fonts/ttf/japanese/
-fc-cache -f .
-ttmkfdir > fonts.dir
-/sbin/service xfs restart
-
+fc-cache
 
 %files
 %defattr(-,root,root)
 %doc COPYING.font.ja *.txt
 %doc opfc-ModuleHP-1.1.1_withIPAFonts_and_Mplus.tar.bz2
-%{_datadir}/fonts/ttf/japanese/*.ttf
-
-
+%{fontdir}/*.ttf
+%_sysconfdir/X11/fontpath.d/*
