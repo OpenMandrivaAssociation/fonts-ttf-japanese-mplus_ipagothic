@@ -10,6 +10,7 @@ Group:		System/Fonts/True type
 License:	Distributable
 URL:		http://mix-mplus-ipa.sourceforge.jp/
 Source0:	%{name}-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 Requires(post,postun): fontconfig
 Requires(post): mkfontdir, mkfontscale
 BuildArch:	noarch
