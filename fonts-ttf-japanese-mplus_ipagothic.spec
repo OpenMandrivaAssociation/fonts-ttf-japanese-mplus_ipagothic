@@ -1,5 +1,5 @@
 %define version	20060520
-%define release	%mkrel 6
+%define release	%mkrel 7
 %define fontdir %_datadir/fonts/TTF/japanese-mplus_ipagothic
 
 Name:		fonts-ttf-japanese-mplus_ipagothic
