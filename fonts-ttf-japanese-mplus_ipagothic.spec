@@ -1,5 +1,5 @@
 %define version	20060520
-%define release	%mkrel 7
+%define release	%mkrel 8
 %define fontdir %_datadir/fonts/TTF/japanese-mplus_ipagothic
 
 Name:		fonts-ttf-japanese-mplus_ipagothic
@@ -11,7 +11,6 @@ License:	Distributable
 URL:		http://mix-mplus-ipa.sourceforge.jp/
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
-Requires(post,postun): fontconfig
 Requires(post): mkfontdir, mkfontscale
 BuildArch:	noarch
 
@@ -37,7 +36,6 @@ ln -s ../../..%fontdir \
 rm -rf $RPM_BUILD_ROOT
 
 %post
-fc-cache
 cd %{fontdir}
 mkfontdir
 mkfontscale
@@ -45,9 +43,6 @@ cd -
 
 %preun
 rm -f %fontdir/fonts.{dir,scale}
-
-%postun
-fc-cache
 
 %files
 %defattr(-,root,root)
