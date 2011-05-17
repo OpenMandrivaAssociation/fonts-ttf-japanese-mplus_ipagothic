@@ -13,6 +13,7 @@ Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 Requires(post): mkfontdir, mkfontscale
 BuildArch:	noarch
+BuildRequires: fontconfig
 
 %description
 M+ OUTLINE FONTS don't have Kanji,
