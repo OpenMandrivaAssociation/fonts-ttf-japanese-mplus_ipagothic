@@ -8,7 +8,7 @@ Version:	%{version}
 Release:	%{release}
 Group:		System/Fonts/True type
 License:	Distributable
-URL:		http://mix-mplus-ipa.sourceforge.jp/
+URL:		https://mix-mplus-ipa.sourceforge.jp/
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 Requires(post): mkfontdir, mkfontscale
